@@ -1,9 +1,8 @@
-const db = require('../db'); // DB connection
+const db = require('../db'); 
 const DEG_TO_RAD = Math.PI / 180;
 
-// Haversine formula
 function getDistance(lat1, lon1, lat2, lon2) {
-  const R = 6371; // Radius of Earth in KM
+  const R = 6371;
   const dLat = (lat2 - lat1) * DEG_TO_RAD;
   const dLon = (lon2 - lon1) * DEG_TO_RAD;
   const a =
@@ -12,10 +11,9 @@ function getDistance(lat1, lon1, lat2, lon2) {
     Math.sin(dLon / 2) ** 2;
 
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  return R * c; // in KM
+  return R * c; 
 }
 
-// Add a new school
 exports.addSchool = async (req, res) => {
   const { name, address, latitude, longitude } = req.body;
 
@@ -42,7 +40,6 @@ exports.addSchool = async (req, res) => {
   }
 };
 
-// List schools sorted by proximity
 exports.listSchools = async (req, res) => {
   const userLat = parseFloat(req.query.latitude);
   const userLon = parseFloat(req.query.longitude);
